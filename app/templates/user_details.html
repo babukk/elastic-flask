@@ -1,0 +1,30 @@
+
+  <div class="tab-content clearfix">
+          <div class="tab-pane active" id="history-tab" style="overflow: auto; height: 400px; max-height:400px;">
+                <table class="table table-striped table-bordered custom-detail-tbl" cellspacing="0" width="100%" id="data-table-detail">
+                    <tbody>
+                        <tr>
+                            <td>Имя/фамилия</td>
+                            <td>{{ user['name'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Компания</td>
+                            <td>{{ user['company_name'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{ user['email'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>login</td>
+                            <td>{{ user['login'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>password</td>
+                            <td>{{ user['password'] }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+          </div>
+  </div>

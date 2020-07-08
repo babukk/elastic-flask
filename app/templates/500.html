@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".fu-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        </div>
+        <nav class="collapse navbar-collapse fu-navbar-collapse" role="navigation" style="z-index: 1;">
+            <ul class="nav navbar-nav">
+               <li><a href="#"></a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" style="z-index: 999;">
+                  <li class="dropdown" style="z-index: 999;">
+                     {% if current_user.is_authenticated %}
+                     <a href="/logout">{{ current_user.username }} - Выйти &rarr;</a>
+                     {% else %}
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Вход <b class="caret"></b></a>
+                     {% endif %}
+                     <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                        <li>
+                           <div class="row" style="z-index: 999;">
+                              <div class="col-md-12">
+                                 <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
+                                    {{ form.csrf_token }}
+                                    <div class="form-group">
+                                       <label class="sr-only" for="input-login">Логин</label>
+                                       <!-- <input type="text" class="form-control" id="input-login" placeholder="Логин" required> -->
+                                       {{ form.username.label }}{{ form.username() }}
+                                    </div>
+                                    <div class="form-group">
+                                       <label class="sr-only" for="input-password">Пароль</label>
+                                       <!-- <input type="password" class="form-control" id="input-password" placeholder="Пароль" required> -->
+                                       {{ form.password.label }}{{ form.password() }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success btn-block">Войти &rarr;</button>
+                                    </div>
+                                 </form>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                  </li>
+            </ul>
+        </nav>
+{% endblock %}
+
+{% block error_block %}
+<center>
+    <br />
+    <h3>Произошла ошибка. Выполнение запроса прервано.</h3>
+</center>
+{% endblock %}

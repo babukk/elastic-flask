@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+    {% block commoncss %}{% endblock %}
+
+    <!--[if lt IE 9]>
+       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <style>
+    .navbar {
+        min-height: 30px;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+    }
+
+    .navbar.scrolled {
+        background: rgb(40, 90, 100);        /* IE */
+        background: rgba(40, 90, 100, 0.7);  /* NON-IE */
+        /* height: 30px; */
+    }
+    </style>
+</head>
+
+<body>
+    <header class="navbar navbar-fixed-top fu-docs-nav" role="navigation">
+        <div class="container" style="width: auto;">
+            {% block header_block %}
+            <nav class="navbar  navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbar-brand" href="/">Проект</a>
+                    </div>
+
+                    <div id="navbar" class="navbar-collapse collapse">
+                        {% if current_user.is_authenticated %}
+                        <ul class="nav navbar-nav">
+                            <li class=""><a href="/companies" class="">Компании</a></li>
+                            <li class=""><a href="/users" class="">Пользователи</a></li>
+                        </ul>
+                        {% endif %}
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                {% if current_user.is_authenticated %}
+                                    <a href="/logout"><b>Выйти</b></a>
+                                {% else %}
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Вход<span class="caret"></span></a>
+                                {% endif %}
+                                <div class="dropdown-menu" id="formLogin">
+                                    <div class="row">
+                                        <div class="container-fluid">
+                                            <form class="" method="post" action="/login">
+                                                {{ form.csrf_token }}
+                                                <div class="form-group">
+                                                    {{ form.username.label }}{{ form.username() }}
+                                                </div>
+                                                <div class="form-group">
+                                                    {{ form.password.label }}{{ form.password() }}
+                                                    <br class="">
+                                                </div>
+                                                <button type="submit" id="btnLogin" class="btn btn-success btn-sm">Вход</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.navbar-collapse -->
+                </div>
+            </nav>
+            {% endblock %}
+        </div>
+    </header>
+
+    {% block error_block %}
+    {% endblock %}
+
+    <div>
+      {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="alert alert-{{category}} alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% block main_block %}{% endblock %}
+<!--
+    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type='text/javascript' src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+-->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    {% block scripts %}
+    {% endblock %}
+    {% block custom_scripts %}
+    {% endblock %}
+</body>
+</html>

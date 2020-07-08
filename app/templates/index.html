@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block commoncss %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" />
+{{ super() }}
+    <style type="text/css">
+        .back-to-top {
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display:none;
+            filter: alpha(opacity=50) !important;
+            -moz-opacity: 0.5  !important;
+            -khtml-opacity: 0.5  !important;
+            opacity: 0.5  !important;
+        }
+    </style>
+{% endblock %}
+
+{% block header_block %}
+{{ super() }}
+{% endblock %}
+
+{% block main_block %}
+{{ super() }}
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+
+{% block custom_scripts %}
+   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.bootstrap-autohidingnavbar.min.js') }}"></script>
+{{ super() }}
+{% endblock %}
